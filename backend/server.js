@@ -1,8 +1,8 @@
 //import area
 
-import Express from "express";
+import express from "express";
 import cors from "cors";
-import { restaurants } from "./api/restaurants.route.js";
+import restaurants from "./api/restaurants.route.js";
 
 //create express server
 const app = express()
