@@ -1,5 +1,6 @@
 import express from "express"
-import RestaurantsCtrl from "../dao/restaurants.controller.js"
+import RestaurantsCtrl from "./restaurants.controller.js"
+
 
 //get access to express router
 

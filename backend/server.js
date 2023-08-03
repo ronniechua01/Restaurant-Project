@@ -12,6 +12,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+
 //use restaurants api (to be created)
 app.use("/api/v1/restaurants", restaurants)
 
