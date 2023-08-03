@@ -1,11 +1,11 @@
 import express from "express"
+import RestaurantsCtrl from "../dao/restaurants.controller.js"
 
 //get access to express router
 
 const router = express.Router()
-
-//demo route 
-//root url responds hello world
-router.route("/").get((req, res) => res.send("hello world"))
+ 
+//root url responds restaurant controller
+router.route("/").get(RestaurantsCtrl.apiGetRestaurants)
 
 export default router
