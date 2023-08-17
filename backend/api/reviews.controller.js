@@ -24,10 +24,10 @@ export default class ReviewsController {
             );
 
             // Sending a success response.
-            req.json({status:"success"});
+            res.json({status:"success"});
         } catch(e) {
             // Handling errors and sending an error response if something goes wrong.
-            req.status(500).json({error: e.message});
+            res.status(500).json({error: e.message});
         }
     }
 
@@ -61,10 +61,10 @@ export default class ReviewsController {
             }
 
             // Sending a success response.
-            req.json({status:"success"});
+            res.json({status:"success"});
         } catch(e) {
             // Handling errors and sending an error response if something goes wrong.
-            req.status(500).json({error: e.message});
+            res.status(500).json({error: e.message});
         }
     }
 
@@ -83,10 +83,10 @@ export default class ReviewsController {
             );
 
             // Sending a success response.
-            req.json({status:"success"});
+            res.json({status:"success"});
         } catch(e) {
             // Handling errors and sending an error response if something goes wrong.
-            req.status(500).json({error: e.message});
+            res.status(500).json({error: e.message});
         }
     }
 }

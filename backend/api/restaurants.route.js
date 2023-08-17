@@ -13,7 +13,7 @@ router.route("/").get(RestaurantsCtrl.apiGetRestaurants)
 //rest
 router
     .route("/review")
-    .post(ReviewCtrl.apiPostReview)
+    .post(ReviewsCtrl.apiPostReview)
     .put(ReviewsCtrl.apiUpdateReview)
     .delete(ReviewsCtrl.apiDeleteReview)
     
