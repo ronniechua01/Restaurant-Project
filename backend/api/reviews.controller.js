@@ -31,42 +31,43 @@ export default class ReviewsController {
         }
     }
 
-    // This method handles updating an existing review.
-    static async apiUpdateReview(req, res, next){
-        try {
-            // Extracting relevant data from the request body. Such as restaurant id, new updated review text, new updated date.
-            const restaurantId = req.body.restaurant_id;
-            const review = req.body.text;
-            const date = new Date();
+   // This method handles updating an existing review.
+static async apiUpdateReview(req, res, next) {
+    try {
+        // Extract the review ID, updated text, and current date from the request body.
+        const reviewId = req.body.review_id;
+        const text = req.body.text;
+        const date = new Date();
 
-            // Updating the review using a DAO method.
-            const reviewResponse = await ReviewsDAO.apiUpdateReview (
-                restaurantId,
-                req.body.user_id,
-                text,
-                date
-            );
+        // Call the updateReview method from ReviewsDAO to update the review.
+        const reviewResponse = await ReviewsDAO.updateReview(
+            reviewId,
+            req.body.user_id, // ID of the user who posted the review.
+            text,             // Updated text for the review.
+            date              // Current date indicating the update.
+        );
 
-            var {error} = reviewResponse;
-            if (error) {
-                // Sending an error response if there's an error during the update.
-                res.status(400).json({error});
-            }
-
-            // Checking if the review was successfully modified, otherwise throwing an error.
-            if (reviewResponse.modifiedCount === 0){
-                throw new Error(
-                    "Unable to update this review, user may not be the original poster"
-                );
-            }
-
-            // Sending a success response.
-            res.json({status:"success"});
-        } catch(e) {
-            // Handling errors and sending an error response if something goes wrong.
-            res.status(500).json({error: e.message});
+        // Check if there's an error response from the update operation.
+        var { error } = reviewResponse;
+        if (error) {
+            // If there's an error, respond with a 400 status and the error message.
+            res.status(400).json({ error });
         }
+
+        // Check if the review was successfully modified.
+        if (reviewResponse.modifiedCount === 0) {
+            // If no reviews were modified, throw an error indicating that the user may not be the original poster.
+            throw new Error("Unable to update review - user may not be original poster");
+        }
+
+        // Respond with a success status if the update was successful.
+        res.json({ status: "success" });
+    } catch (e) {
+        // If an error occurs during the update process, respond with a 500 status and the error message.
+        res.status(500).json({ error: e.message });
     }
+}
+
 
     // This method handles deleting a review.
     static async apiDeleteReview(req, res, next) {
