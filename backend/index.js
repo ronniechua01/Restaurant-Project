@@ -6,6 +6,7 @@ import app from "./server.js";
 import mongodb from "mongodb";
 import dotenv from "dotenv";
 import restaurantsDAO from "./dao/restaurantsDAO.js"
+import ReviewsDAO from "./dao/reviewsDAO.js"
 
 // Load environment variables
 dotenv.config();
@@ -30,6 +31,7 @@ MongoClient.connect(process.env.RESTREVIEWS_DB_URI, {
   })
   .then(async client => {
       await restaurantsDAO.injectDB(client)
+      await ReviewsDAO.injectDB(client)
       // The database connection is successful
       console.log("Connected to the database!")
       // Start the server once the database connection is established
