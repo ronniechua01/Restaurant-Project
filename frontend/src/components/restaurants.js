@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function Restaurants() {
+function Restaurant() {
   return (
     <div className="App">
       Hello World.
@@ -9,4 +9,4 @@ function Restaurants() {
   );
 }
 
-export default Restaurants;
+export default Restaurant;
