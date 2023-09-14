@@ -6,6 +6,7 @@ import AddReview from "./components/add-review";
 import Restaurant from "./components/restaurants";
 import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
+import Styles from "./App.css"
 
 function App() {
   //create an initial value to the user variable
@@ -26,7 +27,7 @@ function App() {
     <Router>
       <div>
         {/* Navigation Bar */}
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <nav className="navbar navbar-expand navbar-dark bg-dark" class={Styles.Name}>
           <a href="/restaurants" className="navbar-brand">
             RestauViews
           </a>
@@ -61,6 +62,7 @@ function App() {
             {/* Route for adding a review to a restaurant */}
             <Route
               path="/restaurants/:id/review"
+              //use render instead of component to add props
               render={(props) => (
                 <AddReview {...props} user={user} />
               )}
