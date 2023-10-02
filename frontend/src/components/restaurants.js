@@ -3,6 +3,7 @@ import RestaurantDataService from "../services/restaurant";
 import { Link } from "react-router-dom";
 
 const Restaurant = props => {
+  // Initialize the state for the restaurant data
   const initialRestaurantState = {
     id: null,
     name: "",
@@ -12,6 +13,7 @@ const Restaurant = props => {
   };
   const [restaurant, setRestaurant] = useState(initialRestaurantState);
 
+  // Function to fetch restaurant data by ID
   const getRestaurant = id => {
     RestaurantDataService.get(id)
       .then(response => {
@@ -23,19 +25,22 @@ const Restaurant = props => {
       });
   };
 
+  // Use useEffect to fetch restaurant data when the component mounts
   useEffect(() => {
     getRestaurant(props.match.params.id);
   }, [props.match.params.id]);
 
+  // Function to delete a review
   const deleteReview = (reviewId, index) => {
     RestaurantDataService.deleteReview(reviewId, props.user.id)
       .then(response => {
         setRestaurant((prevState) => {
-          prevState.reviews.splice(index, 1)
+          // Remove the deleted review from the state
+          prevState.reviews.splice(index, 1);
           return({
             ...prevState
-          })
-        })
+          });
+        });
       })
       .catch(e => {
         console.log(e);
@@ -67,6 +72,7 @@ const Restaurant = props => {
                          <strong>User: </strong>{review.name}<br/>
                          <strong>Date: </strong>{review.date}
                        </p>
+                       {/* Display Delete and Edit buttons for the user's own reviews */}
                        {props.user && props.user.id === review.user_id &&
                           <div className="row">
                             <a onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</a>
